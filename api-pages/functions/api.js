@@ -9,8 +9,20 @@ export async function onRequest(context) {
   const filterDays = parseInt(url.searchParams.get('days')) || null;
   const viewMode = url.searchParams.get('view'); 
 
+  // Bloqueio por Origin/Referer no servidor
+  const origin = request.headers.get('Origin') || '';
+  const referer = request.headers.get('Referer') || '';
+  const isAllowed = origin.includes('dicasbrasil.com.br') || referer.includes('dicasbrasil.com.br');
+
+  if (!isAllowed && request.method !== 'OPTIONS') {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 403,
+      headers: { 'Content-Type': 'application/json;charset=UTF-8' }
+    });
+  }
+
   const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': 'https://stalker.dicasbrasil.com.br',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': '*',
     'Access-Control-Max-Age': '86400',
