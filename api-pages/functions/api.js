@@ -88,7 +88,7 @@ export async function onRequest(context) {
     try {
         console.log("Attempting via proxy fallback...");
         await new Promise(r => setTimeout(r, 1000));
-        const proxyUrl = `https://insta-proxy-lz.pages.dev/?url=${encodeURIComponent(url)}`;
+        const proxyUrl = `https://proxygram.pages.dev/?url=${encodeURIComponent(url)}`;
         return await tryFetch(proxyUrl, USER_AGENTS[0]);
     } catch (e) {
         throw lastError || e || new Error("Falha após todas as tentativas (incluindo proxy)");
@@ -109,7 +109,7 @@ export async function onRequest(context) {
     return jsonResponse({ error: 'Username or shortcode is required' }, 400);
   }
 
-  const worker_url = "https://insta-proxy-lz.pages.dev/?url=";
+  const worker_url = "https://proxygram.pages.dev/?url=";
   
   // Se 'target' estiver presente, verificamos se 'username' segue 'target'
   if (target) {
