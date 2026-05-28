@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "devgram",
+  "compatibility_date": "2026-05-28",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "api-pages"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
